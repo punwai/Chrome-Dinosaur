@@ -1,4 +1,5 @@
-# Chrome-Dinosaur by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club
+## Chrome-Dinosaur 
+# by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club
 What are libraries?
 - Libraries are a collection of functions which adds functions to a language.
 - A video game library in python might add functions such as createSprite() which are not usable in normal python.
@@ -15,7 +16,7 @@ To import pygame into your python code, add this to your python code:
 
 ``` import pygame ```
 
-#Initializing
+# Initializing
 The first thing we would like to do is initialize the project: We do this by 
 ```
 import pygame
@@ -36,7 +37,7 @@ while True: #gameLoop it draws the frames of the game
 ```
 The important parts of this code is the contents of while True: as it is the game loop, or the loop which draws the frame every second and updates the state of the game. The event loop (for event in pygame.event.get()) loops through all the events that have just happened -- an example of this being the user pressing the exit button on the window -- and then decides how to respond to the user input. Anything before the gameloop is just initialization code.
 
-Drawing Shapes
+# Drawing Shapes
 To draw shapes in pygame, we use predefined commands from the pygame library. To do this, we edit the game loop 
 
 ```
@@ -52,7 +53,7 @@ while True:
   pygame.display.update() 
 ```
 
-Drawing the Ground
+# Drawing the Ground
 Now that we know how to draw a shape, we would like to have the practical use of the shape in the game. To do this, we will draw a ground. The ground is essentially a rectangle which left corner is on the edge and the width of the rectangle is as wide as the window. As we may want to experiment with the height of the ground we will use a variable to store it.
 
 ```GROUND_HEIGHT = height-200#The y coordinate of the floor which is 200 pixels away from the bottom```
@@ -63,7 +64,10 @@ To draw the ground, add this code to the main loop
 
 As an update, your code should now look like this.
 
-```import pygame
+```
+#main.py
+
+import pygame
 pygame.init() #this ‘starts up’ pygame
 size = width,height = 640, 480 #creates tuple called size with width 400 and height 230 
 gameDisplay= pygame.display.set_mode(size) #creates screen
@@ -84,6 +88,34 @@ while True: #gameLoop it draws the frames of the game
   pygame.display.update() #updates the screen
 ```
 
-The Dinosaur
-To create the dinosaur, we will
+# The Dinosaur
+To create the dinosaur, we will first create a class defining a dinosaur and then create a dinosaur object which we will manipulate in the gameloop. To create a class, we start a new file called dinosaur.py in the same project folder as the main.py code. The class should look like this.
+
+```
+import pygame
+dinocolour = 255,255,255
+DINOHEIGHT = 40
+DINOWIDTH = 20
+class Dinosaur:
+  def __init__(self, surfaceHeight):
+    self.x = 60
+    self.y = 0
+    self.yvelocity = 0
+    self.height = DINOHEIGHT
+    self.width = DINOWIDTH
+    self.surfaceHeight = surfaceHeight
+  def jump(self): #When adding classes into function, the first parameter must be the parameter
+    if(self.y == 0): #Only allow jumping if the dinosaur is on the ground to prevent mid air jumps.
+      self.yvelocity = 300
+  def update(self, deltaTime): #Updates the y position of the dinosaur each second
+    self.yvelocity += -500*deltaTime #Gravity
+    self.y += self.yvelocity * deltaTime
+    if self.y < 0: #if the dinosaur sinks into the ground, make velocity and y = 0
+      self.y = 0
+      self.yvelocity = 0
+
+	
+  def draw(self,display):
+    pygame.draw.rect(display,dinocolour,[self.x,self.surfaceHeight-self.y-self.height,self.width,self.height])
+```
 
