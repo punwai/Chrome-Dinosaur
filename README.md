@@ -8,9 +8,9 @@ What are libraries?
 Intro to Pygame
 - Pygame is a library meaning that you have to download it and import it into your code before you are able to use it.
 You can install pygame by typing this in your terminal:
-
+```
 pip3 install pygame
 
-To import pygame into your python code, do:
+To import pygame into your python code, do: 
 import pygame
-
+```
