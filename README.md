@@ -26,12 +26,12 @@ gameDisplay= pygame.display.set_mode(size) #creates screen
 
 while True: #gameLoop it draws the frames of the game 
 
-for event in pygame.event.get(): #Check for events
-if event.type == pygame.QUIT:
-pygame.quit() #quits
-quit()
+  for event in pygame.event.get(): #Check for events
+    if event.type == pygame.QUIT:
+      pygame.quit() #quits
+      quit()
 
-pygame.display.update() #updates the screen
+  pygame.display.update() #updates the screen
 
 ```
 The important parts of this code is the contents of while True: as it is the game loop, or the loop which draws the frame every second and updates the state of the game. The event loop (for event in pygame.event.get()) loops through all the events that have just happened -- an example of this being the user pressing the exit button on the window -- and then decides how to respond to the user input. Anything before the gameloop is just initialization code.
@@ -39,14 +39,15 @@ The important parts of this code is the contents of while True: as it is the gam
 Drawing Shapes
 To draw shapes in pygame, we use predefined commands from the pygame library. To do this, we edit the game loop 
 
-```white = 255,255,255 #Define the RGB value of white as a tuple
+```
+white = 255,255,255 #Define the RGB value of white as a tuple
 while True:
-for event in pygame.event.get():
-if event.type == pygame.QUIT:
-pygame.quit()
-quit()			
-pygame.draw.rect(gameDisplay, white, [30,30,40,50]) 
-#draws a rectangle at coordinate (30 ,30) with width 40 pixel, height 50 pixels and with colour white on the surface ’gameDisplay’
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      pygame.quit()
+      quit()			
+  pygame.draw.rect(gameDisplay, white, [30,30,40,50]) 
+  #draws a rectangle at coordinate (30 ,30) with width 40 pixel, height 50 pixels and with colour white on the surface ’gameDisplay’
 
-pygame.display.update() 
+  pygame.display.update() 
 ```
