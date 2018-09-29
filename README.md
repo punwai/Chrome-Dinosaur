@@ -128,5 +128,151 @@ from dinosaur import Dinosaur #import the class Dinosaur from the file ’dinosa
 dinosaur = Dinosaur(GROUND_HEIGHT)
 ```
 
-As
+As our functions require a deltaTime (change in time between the current Game loop and the previous gameloop) which makes our dinosaur move relative to time not the speed of the computer running the game. To do that, we add this before the gameloop
 
+```dinosaur = Dinosaur(GROUND_HEIGHT)```
+
+and this at the start of the gameloop
+
+```t = pygame.time.get_ticks() #Get current time
+deltaTime = (t-lastFrame)/1000.0 #Find difference in time and then convert it to seconds
+lastFrame = t #set lastFrame as the current time for next frame.
+```
+
+Now we want to draw and update the dinosaur
+
+```dinosaur.update(deltaTime)
+dinosaur.draw(gameDisplay) #Draw dinosaur on gameDisplay
+```
+
+After that, we would like to jump if the user presses space.
+
+```if event.type == pygame.KEYDOWN: #If user uses the keyboard
+if event.key == pygame.K_SPACE: #If that key is space
+	dinosaur.jump() #Make dinosaur jump
+```
+
+In the end, your main.py should look like the following
+
+```
+import pygame
+from dinosaur import Dinosaur #import the class Dinosaur from the file ’dinosaur’
+
+pygame.init() #this ‘starts up’ pygame
+
+#initialize game
+size = width,height = 640, 480#creates tuple called size with width 400  and height 230 
+gameDisplay= pygame.display.set_mode(size) #creates screen
+xPos = 0
+yPos = 0
+GROUND_HEIGHT = height-100 
+
+# create Dinosaur
+dinosaur = Dinosaur(GROUND_HEIGHT)
+
+#create lastframe variable
+lastFrame = pygame.time.get_ticks() #get ticks returns current time in milliseconds
+
+#define game colours
+white = 255,255,255
+black = 0,0,0
+
+while True: #gameLoop it draws the frames of the game 
+    t = pygame.time.get_ticks() #Get current time
+    deltaTime = (t-lastFrame)/1000.0 #Find difference in time and then convert it to seconds
+    lastFrame = t #set lastFrame as the current time for next frame.
+
+    for event in pygame.event.get(): #Check for events
+        if event.type == pygame.QUIT:
+            pygame.quit() #quits
+            quit()
+        if event.type == pygame.KEYDOWN: #If user uses the keyboard
+            if event.key == pygame.K_SPACE: #If that key is space
+                dinosaur.jump() #Make dinosaur jump
+
+
+    gameDisplay.fill(black)
+
+    dinosaur.update(deltaTime)
+    dinosaur.draw(gameDisplay)
+
+    pygame.draw.rect(gameDisplay,white, [0,GROUND_HEIGHT, width, height-GROUND_HEIGHT])
+    pygame.display.update() #updates the screen 
+
+```
+
+
+# The Obstacle
+
+Just like the dinosaur, we will create the class for the obstacles on a completely separate file. I will name mine obstacle.py
+
+```
+# obstacle.py
+
+import pygame
+
+colour = 0,0,255
+class Obstacle:
+    def __init__(self, x, size, GroundHeight):
+        self.x = x
+        self.size = size
+        self.GroundHeight = GroundHeight
+
+    def draw(self, gameDisplay):
+        pygame.draw.rect(gameDisplay, colour, [self.x, self.GroundHeight-self.size, self.size, self.size])
+    
+    def update(self, deltaTime, velocity):
+        self.x -= velocity*deltaTime
+
+    def checkOver(self):
+        if self.x < 0:
+            return True
+        else:
+            return False
+```
+
+#### Initializing the obstacle
+To initialize the obstacle, we add this before the gameloop in your main.py file
+
+```
+# main.py
+
+import random
+from obstacle import Obstacle
+MINGAP = 200
+VELOCITY = 300
+MAXGAP = 600
+obstacles = []
+num_of_obstacles = 4
+lastObstacle = width
+SCORE = 0
+obstaclesize = 50
+for i in range(4):
+	lastObstacle += MINGAP+(MAXGAP-MINGAP)*random.random() #Make distance between rocks random
+	obstacles.append(Obstacle(lastObstacle, obstaclesize, GROUND_HEIGHT))
+```
+
+#### Making the Obstacles move
+To make the obstacles move, we would need to add the following to the main.py file
+Now that we have created obstacles, we have to use the update function on them. In the initializing code above, we have defined VELOCITY which will be the speed at which the obstacles will move. Add the following into the main loop.
+
+```
+for obs in obstacles:
+	obs.update(deltaTime, VELOCITY)
+	obs.draw(gameDisplay)
+```
+
+To check if the obstacle has passed, we need add the if statement into the for loop above. Each time the obstacle touches the edge of the screen, it resets its position and the player also scores a point. 
+
+```
+if(obs.checkOver()):
+	SCORE += 1
+	lastObstacle += MINGAP+(MAXGAP-MINGAP)*random.random()
+	obs.x = lastObstacle
+```
+
+Also, in each frame of the game, we have to update the position of the lastObstacle (Keeps track of the position of the final obstacle so that the obstacles can add itself to the back of the queue. We do this by
+
+```
+lastObstacle -= VELOCITY*deltaTime
+```
