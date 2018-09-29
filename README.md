@@ -1,4 +1,4 @@
-# Chrome-Dinosaur 
+# Chrome-Dinosaur
 
 ### *by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club*
 
@@ -19,15 +19,17 @@ To import pygame into your python code, add this to your python code:
 ``` import pygame ```
 
 # Initializing
-The first thing we would like to do is initialize the project: We do this by 
+The first thing we would like to do is initialize the project: We do this by
+
 ```
 import pygame
 pygame.init() #this ‘starts up’ pygame
 
-size = width,height = 640, 480#creates tuple called size with width 400  and height 230 
+size = width,height = 640, 480#creates tuple called size with width 400  and height 230
 gameDisplay= pygame.display.set_mode(size) #creates screen
 
-while True: #gameLoop it draws the frames of the game 
+while True: #gameLoop it draws the frames of the game
+
 
   for event in pygame.event.get(): #Check for events
     if event.type == pygame.QUIT:
@@ -40,7 +42,7 @@ while True: #gameLoop it draws the frames of the game
 The important parts of this code is the contents of while True: as it is the game loop, or the loop which draws the frame every second and updates the state of the game. The event loop (for event in pygame.event.get()) loops through all the events that have just happened -- an example of this being the user pressing the exit button on the window -- and then decides how to respond to the user input. Anything before the gameloop is just initialization code.
 
 # Drawing Shapes
-To draw shapes in pygame, we use predefined commands from the pygame library. To do this, we edit the game loop 
+To draw shapes in pygame, we use predefined commands from the pygame library. To do this, we edit the game loop
 
 ```
 white = 255,255,255 #Define the RGB value of white as a tuple
@@ -49,10 +51,10 @@ while True:
     if event.type == pygame.QUIT:
       pygame.quit()
       quit()			
-  pygame.draw.rect(gameDisplay, white, [30,30,40,50]) 
+  pygame.draw.rect(gameDisplay, white, [30,30,40,50])
   #draws a rectangle at coordinate (30 ,30) with width 40 pixel, height 50 pixels and with colour white on the surface ’gameDisplay’
 
-  pygame.display.update() 
+  pygame.display.update()
 ```
 
 # Drawing the Ground
@@ -71,14 +73,14 @@ As an update, your code should now look like this.
 
 import pygame
 pygame.init() #this ‘starts up’ pygame
-size = width,height = 640, 480 #creates tuple called size with width 400 and height 230 
+size = width,height = 640, 480 #creates tuple called size with width 400 and height 230
 gameDisplay= pygame.display.set_mode(size) #creates screen
-GROUND_HEIGHT = height-100 
+GROUND_HEIGHT = height-100
 black = 0,0,0
 white = 255,255,255 #Define the RGB value of white as a tuple
 xPos = 0
 yPos = 0
-while True: #gameLoop it draws the frames of the game 
+while True: #gameLoop it draws the frames of the game
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       pygame.quit() #quits
@@ -116,7 +118,6 @@ class Dinosaur:
       self.y = 0
       self.yvelocity = 0
 
-	
   def draw(self,display):
     pygame.draw.rect(display,dinocolour,[self.x,self.surfaceHeight-self.y-self.height,self.width,self.height])
 ```
@@ -161,11 +162,11 @@ from dinosaur import Dinosaur #import the class Dinosaur from the file ’dinosa
 pygame.init() #this ‘starts up’ pygame
 
 #initialize game
-size = width,height = 640, 480#creates tuple called size with width 400  and height 230 
+size = width,height = 640, 480#creates tuple called size with width 400  and height 230
 gameDisplay= pygame.display.set_mode(size) #creates screen
 xPos = 0
 yPos = 0
-GROUND_HEIGHT = height-100 
+GROUND_HEIGHT = height-100
 
 # create Dinosaur
 dinosaur = Dinosaur(GROUND_HEIGHT)
@@ -177,7 +178,7 @@ lastFrame = pygame.time.get_ticks() #get ticks returns current time in milliseco
 white = 255,255,255
 black = 0,0,0
 
-while True: #gameLoop it draws the frames of the game 
+while True: #gameLoop it draws the frames of the game
     t = pygame.time.get_ticks() #Get current time
     deltaTime = (t-lastFrame)/1000.0 #Find difference in time and then convert it to seconds
     lastFrame = t #set lastFrame as the current time for next frame.
@@ -220,7 +221,7 @@ class Obstacle:
 
     def draw(self, gameDisplay):
         pygame.draw.rect(gameDisplay, colour, [self.x, self.GroundHeight-self.size, self.size, self.size])
-    
+
     def update(self, deltaTime, velocity):
         self.x -= velocity*deltaTime
 
@@ -262,7 +263,7 @@ for obs in obstacles:
 	obs.draw(gameDisplay)
 ```
 
-To check if the obstacle has passed, we need add the if statement into the for loop above. Each time the obstacle touches the edge of the screen, it resets its position and the player also scores a point. 
+To check if the obstacle has passed, we need add the if statement into the for loop above. Each time the obstacle touches the edge of the screen, it resets its position and the player also scores a point.
 
 ```
 if(obs.checkOver()):
