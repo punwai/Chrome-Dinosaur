@@ -121,3 +121,5 @@ class Dinosaur:
     pygame.draw.rect(display,dinocolour,[self.x,self.surfaceHeight-self.y-self.height,self.width,self.height])
 ```
 
+
+
