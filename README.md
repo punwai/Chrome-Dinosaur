@@ -1,5 +1,7 @@
 ## Chrome-Dinosaur 
-# by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club
+
+*by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club*
+
 What are libraries?
 - Libraries are a collection of functions which adds functions to a language.
 - A video game library in python might add functions such as createSprite() which are not usable in normal python.
