@@ -277,3 +277,5 @@ Also, in each frame of the game, we have to update the position of the lastObsta
 ```
 lastObstacle -= VELOCITY*deltaTime
 ```
+
+https://learnopengl.com/img/in-practice/breakout/collisions_overlap.png
