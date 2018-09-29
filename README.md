@@ -121,5 +121,12 @@ class Dinosaur:
     pygame.draw.rect(display,dinocolour,[self.x,self.surfaceHeight-self.y-self.height,self.width,self.height])
 ```
 
+Now that we have created the class, we need to import the class into the game and create the dinosaur object to do that, we add the following code OUTSIDE the game loop.
 
+```
+from dinosaur import Dinosaur #import the class Dinosaur from the file ’dinosaur’
+dinosaur = Dinosaur(GROUND_HEIGHT)
+```
+
+As
 
