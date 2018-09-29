@@ -1,4 +1,4 @@
-## Chrome-Dinosaur 
+# Chrome-Dinosaur 
 
 *by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club*
 
