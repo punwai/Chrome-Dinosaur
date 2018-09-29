@@ -1,4 +1,4 @@
-# Chrome-Dinosaur
+# Chrome-Dinosaur by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club
 What are libraries?
 - Libraries are a collection of functions which adds functions to a language.
 - A video game library in python might add functions such as createSprite() which are not usable in normal python.
@@ -51,3 +51,39 @@ while True:
 
   pygame.display.update() 
 ```
+
+Drawing the Ground
+Now that we know how to draw a shape, we would like to have the practical use of the shape in the game. To do this, we will draw a ground. The ground is essentially a rectangle which left corner is on the edge and the width of the rectangle is as wide as the window. As we may want to experiment with the height of the ground we will use a variable to store it.
+
+```GROUND_HEIGHT = height-200#The y coordinate of the floor which is 200 pixels away from the bottom```
+
+To draw the ground, add this code to the main loop
+
+```pygame.draw.rect(gameDisplay,white, [0,GROUND_HEIGHT, width, height-GROUND_HEIGHT])```
+
+As an update, your code should now look like this.
+
+```import pygame
+pygame.init() #this ‘starts up’ pygame
+size = width,height = 640, 480 #creates tuple called size with width 400 and height 230 
+gameDisplay= pygame.display.set_mode(size) #creates screen
+GROUND_HEIGHT = height-100 
+black = 0,0,0
+white = 255,255,255 #Define the RGB value of white as a tuple
+xPos = 0
+yPos = 0
+while True: #gameLoop it draws the frames of the game 
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      pygame.quit() #quits
+      quit()
+  gameDisplay.fill(black)
+  pygame.draw.rect(gameDisplay,white, [0,GROUND_HEIGHT, width, height-GROUND_HEIGHT])
+  xPos += 1
+  yPos += 1
+  pygame.display.update() #updates the screen
+```
+
+The Dinosaur
+To create the dinosaur, we will
+
