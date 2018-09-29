@@ -10,16 +10,17 @@ What are libraries?
 
 Intro to Pygame
 - Pygame is a library meaning that you have to download it and import it into your code before you are able to use it.
-You can install pygame by typing this in your TERMINAL:
+You can install pygame by typing this in your TERMINAL: 
 
 ``` pip3 install pygame ```
 
-To import pygame into your python code, add this to your python code:
+To import pygame into your python code, add this to your python code: 
 
 ``` import pygame ```
 
 # Initializing
 The first thing we would like to do is initialize the project: We do this by
+
 ```
 import pygame
 pygame.init() #this ‘starts up’ pygame
@@ -28,6 +29,7 @@ size = width,height = 640, 480#creates tuple called size with width 400  and hei
 gameDisplay= pygame.display.set_mode(size) #creates screen
 
 while True: #gameLoop it draws the frames of the game
+
 
   for event in pygame.event.get(): #Check for events
     if event.type == pygame.QUIT:
@@ -115,7 +117,6 @@ class Dinosaur:
     if self.y < 0: #if the dinosaur sinks into the ground, make velocity and y = 0
       self.y = 0
       self.yvelocity = 0
-
 
   def draw(self,display):
     pygame.draw.rect(display,dinocolour,[self.x,self.surfaceHeight-self.y-self.height,self.width,self.height])
