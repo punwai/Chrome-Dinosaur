@@ -1,6 +1,6 @@
 # Chrome-Dinosaur
 
-### *by Pun Waiwitlikhit 29 September 2018 Brighton College Programming Club*
+### *by Pun Waiwitlikhit 29 September 2018 for Brighton College Programming Club*
 
 What are libraries?
 - Libraries are a collection of functions which adds functions to a language.
